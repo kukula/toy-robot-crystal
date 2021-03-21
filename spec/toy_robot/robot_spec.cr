@@ -10,7 +10,7 @@ describe ToyRobot::Table do
       robot = ToyRobot::Robot.new
       robot.x = 0
       robot.y = 0
-      robot.direction = ToyRobot::Direction::North
+      robot.direction = ToyRobot::Robot::Direction::NORTH
 
       robot.placed?.should eq(true)
     end

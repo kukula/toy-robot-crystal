@@ -1,12 +1,12 @@
 module ToyRobot
-  enum Direction
-    North
-    South
-    East
-    West
-  end
-
   struct Robot
+    enum Direction
+      NORTH
+      SOUTH
+      EAST
+      WEST
+    end
+
     property x : Int32?
     property y : Int32?
     property direction : Direction?

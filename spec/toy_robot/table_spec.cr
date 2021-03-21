@@ -20,7 +20,7 @@ describe ToyRobot::Table do
       robot = ToyRobot::Robot.new
       robot.x = ToyRobot::Table::DEFAULT_WIDTH + 1
       robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Direction::North
+      robot.direction = ToyRobot::Robot::Direction::NORTH
 
       ToyRobot::Table.new.fits?(robot).should eq(false)
     end
@@ -29,7 +29,7 @@ describe ToyRobot::Table do
       robot = ToyRobot::Robot.new
       robot.x = ToyRobot::Table::DEFAULT_WIDTH
       robot.y = ToyRobot::Table::DEFAULT_HEIGHT + 1
-      robot.direction = ToyRobot::Direction::North
+      robot.direction = ToyRobot::Robot::Direction::NORTH
 
       ToyRobot::Table.new.fits?(robot).should eq(false)
     end
@@ -38,7 +38,7 @@ describe ToyRobot::Table do
       robot = ToyRobot::Robot.new
       robot.x = ToyRobot::Table::DEFAULT_WIDTH
       robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Direction::North
+      robot.direction = ToyRobot::Robot::Direction::NORTH
 
       ToyRobot::Table.new.fits?(robot).should eq(true)
     end
