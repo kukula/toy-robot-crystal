@@ -1,0 +1,13 @@
+name: toy_robot_crystal
+version: 0.1.0
+
+authors:
+  - Anatoliy Kukul <anatolkukula@gmail.com>
+
+targets:
+  toy_robot_crystal:
+    main: src/main.cr
+
+crystal: 0.35.1
+
+license: MIT
