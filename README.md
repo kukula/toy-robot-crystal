@@ -30,6 +30,26 @@ $ cat spec/examples/example_2 | ./main
 3,3,NORTH
 ```
 
+## Few words about Crystal
+
+Install
+
+```
+$ brew install crystal
+```
+
+Run tests
+
+```
+$ crystal spec
+```
+
+If you don't want to build an executive, you can just run it
+
+```
+$ cat spec/examples/example_0 | crystal run src/main.cr
+```
+
 ## Task explanation
 
 - The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
@@ -56,10 +76,10 @@ REPORT
 - REPORT will announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient.
 
 - A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT and REPORT commands.
-. Input can be from a file, or from standard input, as the developer chooses.
-. Provide test data to exercise the application.
+- Input can be from a file, or from standard input, as the developer chooses.
+- Provide test data to exercise the application.
 
-> Constraints:
+Constraints:
 > The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
 > Any move that would cause the robot to fall must be ignored.
 
