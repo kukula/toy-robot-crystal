@@ -14,7 +14,9 @@ describe ToyRobot::Commander do
         input = "PLACE 0 0 NORTH"
         commander = ToyRobot::Commander.new
 
-        commander.parse(input).should eq(nil)
+        expect_raises(ToyRobot::UnrecognisedCommand) do
+          commander.parse(input)
+        end
       end
     end
 
@@ -54,6 +56,34 @@ describe ToyRobot::Commander do
 
         commander.parse(input).should be_a(ToyRobot::Command::Report)
       end
+    end
+  end
+
+  describe "#execute" do
+    it "updates robot after a move and returns nil when move" do
+      input = "MOVE"
+      robot = ToyRobot::Robot.new
+      robot.x = 0
+      robot.y = 0
+      robot.direction = ToyRobot::Robot::Direction::NORTH
+      commander = ToyRobot::Commander.new
+      commander.robot = robot
+
+      commander.robot.y.should eq(0)
+      commander.execute(input).should be_nil
+      commander.robot.y.should eq(1)
+    end
+
+    it "returns report" do
+      input = "Report"
+      robot = ToyRobot::Robot.new
+      robot.x = 4
+      robot.y = 2
+      robot.direction = ToyRobot::Robot::Direction::WEST
+      commander = ToyRobot::Commander.new
+      commander.robot = robot
+
+      commander.execute(input).should eq("4,2,WEST")
     end
   end
 end

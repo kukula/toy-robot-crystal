@@ -2,7 +2,7 @@ require "./command/*"
 
 module ToyRobot
   class Commander
-    getter robot : Robot
+    property robot : Robot
     getter table : Table
 
     def initialize(@robot = Robot.new, @table = Table.new)
@@ -22,9 +22,24 @@ module ToyRobot
         Command::Rotate.new(robot, Command::Rotate::Direction::RIGHT)
       when /^REPORT$/i
         Command::Report.new(robot)
+      else
+        raise UnrecognisedCommand.new("Unrecognised command, please RTM")
       end
-    rescue ex : NotPlaced | OutsideOfTable | WrongDirection
-      STDERR.puts "Ignored error for input #{input}: #{ex.message}"
+    end
+
+    def execute(input : String) : String?
+      command = parse(input)
+      return unless command
+
+      case output = command.execute
+      when Robot
+        self.robot = output
+        return
+      else
+        output
+      end
+    rescue ex : UnrecognisedCommand | NotPlaced | OutsideOfTable | WrongDirection
+      STDERR.puts "Ignored error for input '#{input}': #{ex.message}"
       nil
     end
   end

@@ -1,11 +1,14 @@
 module ToyRobot
   module CLI
-    def self.run(args : Array(String))
-      commander = ToyRobot::Commander.new
+    def self.run(input : IO::FileDescriptor)
+      commander = Commander.new
 
-      STDIN.each_line do |input|
-        commander.parse(input) if input
-        break if input =~ /exit/i
+      input.each_line do |line|
+        next unless line
+        result = commander.execute(line)
+        next unless result
+
+        STDOUT.puts result
       end
     end
   end
