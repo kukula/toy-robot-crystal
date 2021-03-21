@@ -20,7 +20,7 @@ module ToyRobot
         robot
       end
 
-      private def new_direction
+      private def new_direction : Int32
         if direction.right?
           robot.direction.as(Robot::Direction).value + 1
         else

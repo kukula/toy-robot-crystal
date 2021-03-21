@@ -1,6 +1,6 @@
 module ToyRobot
   module CLI
-    def self.run(input : IO::FileDescriptor)
+    def self.run(input : IO::FileDescriptor, output : IO::FileDescriptor)
       commander = Commander.new
 
       input.each_line do |line|
@@ -8,7 +8,7 @@ module ToyRobot
         result = commander.execute(line)
         next unless result
 
-        STDOUT.puts result
+        output.puts result
       end
     end
   end

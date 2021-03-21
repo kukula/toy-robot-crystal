@@ -1,3 +1,3 @@
 require "./toy_robot"
 
-ToyRobot::CLI.run(STDIN)
+ToyRobot::CLI.run(STDIN, STDOUT)

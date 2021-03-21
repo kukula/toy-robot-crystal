@@ -25,7 +25,7 @@ module ToyRobot
         robot
       end
 
-      private def movement : Tuple(Int32, Int32)
+      private def movement : Tuple(Int32, Int32)?
         DIRECTIONS[robot.direction.to_s]
       end
 
