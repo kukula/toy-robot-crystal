@@ -2,8 +2,8 @@ module ToyRobot
   struct Robot
     enum Direction
       NORTH
-      SOUTH
       EAST
+      SOUTH
       WEST
     end
 

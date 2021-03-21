@@ -16,10 +16,10 @@ module ToyRobot
           .new(robot, table, x.to_i, y.to_i, Robot::Direction.parse(direction))
       when /^MOVE$/i
         Command::Move.new(robot, table)
-        # when /^LEFT$/i
-        #   Command::Rotate.new(@robot, LEFT)
-        # when /^RIGHT$/i
-        #   Command::Rotate.new(@robot, RIGHT)
+      when /^LEFT$/i
+        Command::Rotate.new(robot, Command::Rotate::Direction::LEFT)
+      when /^RIGHT$/i
+        Command::Rotate.new(robot, Command::Rotate::Direction::RIGHT)
       when /^REPORT$/i
         Command::Report.new(robot)
       end

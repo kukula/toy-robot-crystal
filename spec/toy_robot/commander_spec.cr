@@ -27,6 +27,26 @@ describe ToyRobot::Commander do
       end
     end
 
+    describe "RIGHT command" do
+      it "returns rotate command" do
+        input = "RIGHT"
+        commander = ToyRobot::Commander.new
+
+        command = commander.parse(input)
+        command.should be_a(ToyRobot::Command::Rotate)
+      end
+    end
+
+    describe "LEFT command" do
+      it "returns rotate command" do
+        input = "LEFT"
+        commander = ToyRobot::Commander.new
+
+        command = commander.parse(input)
+        command.should be_a(ToyRobot::Command::Rotate)
+      end
+    end
+
     describe "REPORT command" do
       it "returns report command" do
         input = "REPORT"
