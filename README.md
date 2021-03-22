@@ -15,7 +15,7 @@ $ ./main
 ```
 
 Just input commands in STDIN, report results goes to STDOUT and errors to STDERR.
-Exit using CMD+D.
+Exit using CTRL+D.
 
 Also you can use it using Unix pipes. For example
 
