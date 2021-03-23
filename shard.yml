@@ -8,6 +8,6 @@ targets:
   toy_robot_crystal:
     main: src/main.cr
 
-crystal: 0.35.1
+crystal: 1.0.0
 
 license: MIT
