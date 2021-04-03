@@ -1,14 +1,15 @@
 module ToyRobot
   module CLI
-    def self.run(input : IO::FileDescriptor, output : IO::FileDescriptor)
-      commander = Commander.new
+    def self.run(
+      input : IO::FileDescriptor,
+      output : IO::FileDescriptor,
+      error_output : IO::FileDescriptor
+    )
+      commander = Commander.new(output, error_output)
 
       input.each_line do |line|
         next unless line
-        result = commander.execute(line)
-        next unless result
-
-        output.puts result
+        commander.execute(line)
       end
     end
   end

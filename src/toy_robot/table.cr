@@ -3,8 +3,8 @@ module ToyRobot
     DEFAULT_WIDTH  = 5
     DEFAULT_HEIGHT = 5
 
-    property width : Int32
-    property height : Int32
+    getter width : Int32
+    getter height : Int32
 
     def initialize(@width = DEFAULT_WIDTH, @height = DEFAULT_HEIGHT)
     end

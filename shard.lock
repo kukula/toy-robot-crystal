@@ -1,2 +1,6 @@
 version: 2.0
-shards: {}
+shards:
+  stdio:
+    git: https://github.com/mosop/stdio.git
+    version: 0.1.4
+

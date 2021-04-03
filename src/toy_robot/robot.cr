@@ -1,5 +1,5 @@
 module ToyRobot
-  struct Robot
+  class Robot
     enum Direction
       NORTH
       EAST
@@ -16,6 +16,10 @@ module ToyRobot
 
     def placed? : Bool
       !x.nil? && !y.nil? && !direction.nil?
+    end
+
+    def to_s : String
+      [x, y, direction].join(",")
     end
   end
 end

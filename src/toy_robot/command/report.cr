@@ -1,10 +1,16 @@
 module ToyRobot
   module Command
     class Report < Base
-      def execute : String?
-        raise NotPlaced.new("You need to place robot before requesting a report") unless robot.placed?
+      property robot : Robot
+      property output : IO::FileDescriptor
 
-        [robot.x, robot.y, robot.direction].join(",")
+      def initialize(@robot : Robot, @output : IO::FileDescriptor)
+      end
+
+      def execute
+        raise NotPlaced.new("You need to place the robot before requesting a report") unless robot.placed?
+
+        output.puts robot.to_s
       end
     end
   end

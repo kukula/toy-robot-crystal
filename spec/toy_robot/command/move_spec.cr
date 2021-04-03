@@ -5,10 +5,10 @@ describe ToyRobot::Command::Move do
     it "moves robot one unit forward in the north direction" do
       table = ToyRobot::Table.new
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
+      ToyRobot::Command::Move.new(robot, table).execute
 
-      resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
-      resulting_robot.x.should eq(0)
-      resulting_robot.y.should eq(1)
+      robot.x.should eq(0)
+      robot.y.should eq(1)
     end
 
     it "raises an exception when robot is on the north edge" do
@@ -28,9 +28,10 @@ describe ToyRobot::Command::Move do
         ToyRobot::Table::DEFAULT_HEIGHT,
         ToyRobot::Robot::Direction::SOUTH)
 
-      resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
-      resulting_robot.x.should eq(0)
-      resulting_robot.y.should eq(ToyRobot::Table::DEFAULT_HEIGHT - 1)
+      ToyRobot::Command::Move.new(robot, table).execute
+
+      robot.x.should eq(0)
+      robot.y.should eq(ToyRobot::Table::DEFAULT_HEIGHT - 1)
     end
 
     it "raises an exception when robot is on the south edge" do
@@ -48,14 +49,13 @@ describe ToyRobot::Command::Move do
         0,
         ToyRobot::Robot::Direction::WEST)
 
-      resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
-      resulting_robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH - 1)
-      resulting_robot.y.should eq(0)
+      ToyRobot::Command::Move.new(robot, table).execute
+      robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH - 1)
+      robot.y.should eq(0)
     end
 
     it "raises an exception when robot is on the west edge" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       expect_raises(ToyRobot::OutsideOfTable) do
@@ -65,12 +65,11 @@ describe ToyRobot::Command::Move do
 
     it "moves robot one unit forward in the east direction" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::EAST)
 
-      resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
-      resulting_robot.x.should eq(1)
-      resulting_robot.y.should eq(0)
+      ToyRobot::Command::Move.new(robot, table).execute
+      robot.x.should eq(1)
+      robot.y.should eq(0)
     end
 
     it "raises an exception when robot is on the east edge" do

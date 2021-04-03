@@ -5,16 +5,16 @@ describe ToyRobot::Command::Place do
     it "returns robot with new coordinates when places robot on the board" do
       robot = ToyRobot::Robot.new
       table = ToyRobot::Table.new
-      resulting_robot = ToyRobot::Command::Place.new(robot,
+      ToyRobot::Command::Place.new(robot,
         table,
         ToyRobot::Table::DEFAULT_WIDTH,
         ToyRobot::Table::DEFAULT_HEIGHT,
         ToyRobot::Robot::Direction::NORTH
       ).execute
 
-      resulting_robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH)
-      resulting_robot.y.should eq(ToyRobot::Table::DEFAULT_HEIGHT)
-      resulting_robot.direction.should eq(ToyRobot::Robot::Direction::NORTH)
+      robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH)
+      robot.y.should eq(ToyRobot::Table::DEFAULT_HEIGHT)
+      robot.direction.should eq(ToyRobot::Robot::Direction::NORTH)
     end
 
     it "raises exception when can't place robot on the board" do

@@ -12,4 +12,12 @@ describe ToyRobot::Robot do
       robot.placed?.should eq(true)
     end
   end
+
+  describe "#to_s" do
+    it "returns string with x, y and direction" do
+      truck = ToyRobot::Robot.new(4, 2, ToyRobot::Robot::Direction::WEST)
+
+      truck.to_s.should eq("4,2,WEST")
+    end
+  end
 end
