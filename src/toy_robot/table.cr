@@ -9,11 +9,15 @@ module ToyRobot
     def initialize(@width = DEFAULT_WIDTH, @height = DEFAULT_HEIGHT)
     end
 
+    def fits?(x : Int32, y : Int32) : Bool
+      (0..width).includes?(x) &&
+        (0..height).includes?(y)
+    end
+
     def fits?(robot : Robot) : Bool
       return false unless robot.placed?
 
-      (0..width).includes?(robot.x.as(Int32)) &&
-        (0..height).includes?(robot.y.as(Int32))
+      fits?(robot.x.as(Int32), robot.y.as(Int32))
     end
   end
 end

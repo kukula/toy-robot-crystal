@@ -10,37 +10,62 @@ describe ToyRobot::Table do
   end
 
   describe "#fits?" do
-    it "returns false when robot isn't placed" do
-      robot = ToyRobot::Robot.new
+    context "for coordinates" do
+      it "returns false when x coordinate isn't on the table" do
+        x = ToyRobot::Table::DEFAULT_WIDTH + 1
+        y = ToyRobot::Table::DEFAULT_HEIGHT
 
-      ToyRobot::Table.new.fits?(robot).should eq(false)
+        ToyRobot::Table.new.fits?(x, y).should eq(false)
+      end
+
+      it "returns false when y coordinate isn't on the table" do
+        x = ToyRobot::Table::DEFAULT_WIDTH
+        y = ToyRobot::Table::DEFAULT_HEIGHT + 1
+
+        ToyRobot::Table.new.fits?(x, y).should eq(false)
+      end
+
+      it "returns true when coordinates are on the table" do
+        x = ToyRobot::Table::DEFAULT_WIDTH
+        y = ToyRobot::Table::DEFAULT_HEIGHT
+
+        ToyRobot::Table.new.fits?(x, y).should eq(true)
+      end
     end
 
-    it "returns false when robot's x coordinate isn't on the table" do
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH + 1
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+    context "for robot" do
+      it "returns false when robot isn't placed" do
+        robot = ToyRobot::Robot.new
 
-      ToyRobot::Table.new.fits?(robot).should eq(false)
-    end
+        ToyRobot::Table.new.fits?(robot).should eq(false)
+      end
 
-    it "returns false when robot's y coordinate isn't on the table" do
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT + 1
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      it "returns false when robot's x coordinate isn't on the table" do
+        robot = ToyRobot::Robot.new(
+          ToyRobot::Table::DEFAULT_WIDTH + 1,
+          ToyRobot::Table::DEFAULT_HEIGHT,
+          ToyRobot::Robot::Direction::NORTH)
 
-      ToyRobot::Table.new.fits?(robot).should eq(false)
-    end
+        ToyRobot::Table.new.fits?(robot).should eq(false)
+      end
 
-    it "returns true when robot's coordinates are on the table" do
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      it "returns false when robot's y coordinate isn't on the table" do
+        robot = ToyRobot::Robot.new(
+          ToyRobot::Table::DEFAULT_WIDTH,
+          ToyRobot::Table::DEFAULT_HEIGHT + 1,
+          ToyRobot::Robot::Direction::NORTH)
 
-      ToyRobot::Table.new.fits?(robot).should eq(true)
+        ToyRobot::Table.new.fits?(robot).should eq(false)
+      end
+
+      it "returns true when robot's coordinates are on the table" do
+        robot = ToyRobot::Robot.new(
+          ToyRobot::Table::DEFAULT_WIDTH,
+          ToyRobot::Table::DEFAULT_HEIGHT,
+          ToyRobot::Robot::Direction::NORTH)
+
+        ToyRobot::Table.new.fits?(robot).should eq(true)
+      end
     end
   end
 end

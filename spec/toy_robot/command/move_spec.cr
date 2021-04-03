@@ -4,10 +4,7 @@ describe ToyRobot::Command::Move do
   describe "#execute" do
     it "moves robot one unit forward in the north direction" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
 
       resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
       resulting_robot.x.should eq(0)
@@ -16,10 +13,9 @@ describe ToyRobot::Command::Move do
 
     it "raises an exception when robot is on the north edge" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      robot = ToyRobot::Robot.new(0,
+        ToyRobot::Table::DEFAULT_HEIGHT,
+        ToyRobot::Robot::Direction::NORTH)
 
       expect_raises(ToyRobot::OutsideOfTable) do
         ToyRobot::Command::Move.new(robot, table).execute
@@ -28,10 +24,9 @@ describe ToyRobot::Command::Move do
 
     it "moves robot one unit forward in the south direction" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Robot::Direction::SOUTH
+      robot = ToyRobot::Robot.new(0,
+        ToyRobot::Table::DEFAULT_HEIGHT,
+        ToyRobot::Robot::Direction::SOUTH)
 
       resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
       resulting_robot.x.should eq(0)
@@ -40,10 +35,7 @@ describe ToyRobot::Command::Move do
 
     it "raises an exception when robot is on the south edge" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::SOUTH
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::SOUTH)
 
       expect_raises(ToyRobot::OutsideOfTable) do
         ToyRobot::Command::Move.new(robot, table).execute
@@ -52,10 +44,9 @@ describe ToyRobot::Command::Move do
 
     it "moves robot one unit forward in the west direction" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::WEST
+      robot = ToyRobot::Robot.new(ToyRobot::Table::DEFAULT_WIDTH,
+        0,
+        ToyRobot::Robot::Direction::WEST)
 
       resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
       resulting_robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH - 1)
@@ -65,9 +56,7 @@ describe ToyRobot::Command::Move do
     it "raises an exception when robot is on the west edge" do
       table = ToyRobot::Table.new
       robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::WEST
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       expect_raises(ToyRobot::OutsideOfTable) do
         ToyRobot::Command::Move.new(robot, table).execute
@@ -77,9 +66,7 @@ describe ToyRobot::Command::Move do
     it "moves robot one unit forward in the east direction" do
       table = ToyRobot::Table.new
       robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::EAST
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::EAST)
 
       resulting_robot = ToyRobot::Command::Move.new(robot, table).execute
       resulting_robot.x.should eq(1)
@@ -88,10 +75,9 @@ describe ToyRobot::Command::Move do
 
     it "raises an exception when robot is on the east edge" do
       table = ToyRobot::Table.new
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::EAST
+      robot = ToyRobot::Robot.new(ToyRobot::Table::DEFAULT_WIDTH,
+        0,
+        ToyRobot::Robot::Direction::EAST)
 
       expect_raises(ToyRobot::OutsideOfTable) do
         ToyRobot::Command::Move.new(robot, table).execute

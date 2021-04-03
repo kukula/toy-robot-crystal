@@ -3,10 +3,7 @@ require "../../spec_helper"
 describe ToyRobot::Command::Rotate do
   describe "#execute" do
     it "rotates the robot 90 degrees right: North -> East" do
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
 
       resulting_robot = ToyRobot::Command::Rotate
         .new(robot, ToyRobot::Command::Rotate::Direction::RIGHT)
@@ -16,10 +13,7 @@ describe ToyRobot::Command::Rotate do
     end
 
     it "rotates the robot 90 degrees left: North -> West" do
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
 
       resulting_robot = ToyRobot::Command::Rotate
         .new(robot, ToyRobot::Command::Rotate::Direction::LEFT)
@@ -29,10 +23,7 @@ describe ToyRobot::Command::Rotate do
     end
 
     it "rotates the robot 90 degrees right: West -> North" do
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::WEST
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       resulting_robot = ToyRobot::Command::Rotate
         .new(robot, ToyRobot::Command::Rotate::Direction::RIGHT)
@@ -42,10 +33,7 @@ describe ToyRobot::Command::Rotate do
     end
 
     it "rotates the robot 90 degrees left: West -> South" do
-      robot = ToyRobot::Robot.new
-      robot.x = 0
-      robot.y = 0
-      robot.direction = ToyRobot::Robot::Direction::WEST
+      robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       resulting_robot = ToyRobot::Command::Rotate
         .new(robot, ToyRobot::Command::Rotate::Direction::LEFT)

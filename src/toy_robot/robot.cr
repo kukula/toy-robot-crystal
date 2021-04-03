@@ -11,6 +11,9 @@ module ToyRobot
     property y : Int32?
     property direction : Direction?
 
+    def initialize(@x = nil, @y = nil, @direction = nil)
+    end
+
     def placed? : Bool
       !x.nil? && !y.nil? && !direction.nil?
     end

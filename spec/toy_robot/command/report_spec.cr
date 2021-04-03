@@ -3,10 +3,9 @@ require "../../spec_helper"
 describe ToyRobot::Command::Report do
   describe "#execute" do
     it "returns report of robots current position" do
-      robot = ToyRobot::Robot.new
-      robot.x = ToyRobot::Table::DEFAULT_WIDTH
-      robot.y = ToyRobot::Table::DEFAULT_HEIGHT
-      robot.direction = ToyRobot::Robot::Direction::NORTH
+      robot = ToyRobot::Robot.new(ToyRobot::Table::DEFAULT_WIDTH,
+        ToyRobot::Table::DEFAULT_HEIGHT,
+        ToyRobot::Robot::Direction::NORTH)
 
       ToyRobot::Command::Report.new(robot).execute.should eq("5,5,NORTH")
     end
