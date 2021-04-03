@@ -1,62 +1,8 @@
 # Toy Robot Coding Puzzle
 
-## Usage
-
-Build
-
-```
-$ crystal build src/main.cr
-```
-
-Run
-
-```
-$ ./main
-```
-
-Just input commands in STDIN, report results goes to STDOUT and errors to STDERR.
-Exit using CTRL+D.
-
-Also you can use it using Unix pipes. For example
-
-```
-$ cat spec/examples/example_0 | ./main
-0,1,NORTH
-
-$ cat spec/examples/example_1 | ./main
-0,0,WEST
-
-$ cat spec/examples/example_2 | ./main
-3,3,NORTH
-```
-
-## Few words about Crystal
-
-Install
-
-```
-$ brew install crystal
-```
-
-Run tests
-
-```
-$ crystal spec
-```
-
-If you don't want to build an executive, you can just run it
-
-```
-$ cat spec/examples/example_0 | crystal run src/main.cr
-```
-
-## Task explanation
-
 - The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
 - There are no other obstructions on the table surface.
-- The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement
-that would result in the robot falling from the table must be prevented, however further valid movement commands must still
-be allowed.
+- The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
 
 - Create an application that can read in commands of the following form:
 
@@ -80,8 +26,8 @@ REPORT
 - Provide test data to exercise the application.
 
 Constraints:
-> The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
-> Any move that would cause the robot to fall must be ignored.
+- The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
+- Any move that would cause the robot to fall must be ignored.
 
 Example Input and Output:
 
@@ -114,3 +60,54 @@ MOVE
 REPORT
 Output: 3,3,NORTH
 ```
+
+
+## Installation
+
+[Install Crystal](https://crystal-lang.org/install/)
+
+## Usage
+
+To build an app run:
+
+```
+shards build
+```
+
+To run:
+
+```
+bin/bin_truck_simulator
+```
+
+Just input commands in STDIN, report results goes to STDOUT and errors to STDERR.
+Exit using CTRL+D.
+
+Also you can use it using Unix pipes. For example:
+
+```
+$ cat spec/examples/example_a | bin/toy_robot_crystal
+0,1,NORTH
+
+$ cat spec/examples/example_b | bin/toy_robot_crystal
+0,0,WEST
+
+$ cat spec/examples/example_c | bin/toy_robot_crystal
+3,3,NORTH
+```
+
+## Testing
+
+To run specs run:
+
+```
+$ crystal spec
+```
+
+## Design decisions
+
+- I choose to build this app using Crystal because it's a very pleasant to work with language, rich with features and tools.
+- `Commander#parse` is kind of controller for user input
+- I used command pattern for commands implementation
+- I used STDIN for user input, STDOUT and STDERR for output. So even though errors are ignored you can write them to error log
+- I used TDD to implement commands and other classes and structs
