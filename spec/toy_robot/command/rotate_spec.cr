@@ -6,8 +6,8 @@ describe ToyRobot::Command::Rotate do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
 
       ToyRobot::Command::Rotate
-        .new(robot, ToyRobot::Command::Rotate::Direction::RIGHT)
-        .execute
+        .new(robot, ToyRobot::Table.new, STDOUT)
+        .execute(ToyRobot::Command::Rotate::RotateDirection::RIGHT)
 
       robot.direction.should eq(ToyRobot::Robot::Direction::EAST)
     end
@@ -16,8 +16,8 @@ describe ToyRobot::Command::Rotate do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
 
       ToyRobot::Command::Rotate
-        .new(robot, ToyRobot::Command::Rotate::Direction::LEFT)
-        .execute
+        .new(robot, ToyRobot::Table.new, STDOUT)
+        .execute(ToyRobot::Command::Rotate::RotateDirection::LEFT)
 
       robot.direction.should eq(ToyRobot::Robot::Direction::WEST)
     end
@@ -26,8 +26,8 @@ describe ToyRobot::Command::Rotate do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       ToyRobot::Command::Rotate
-        .new(robot, ToyRobot::Command::Rotate::Direction::RIGHT)
-        .execute
+        .new(robot, ToyRobot::Table.new, STDOUT)
+        .execute(ToyRobot::Command::Rotate::RotateDirection::RIGHT)
 
       robot.direction.should eq(ToyRobot::Robot::Direction::NORTH)
     end
@@ -36,8 +36,8 @@ describe ToyRobot::Command::Rotate do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       ToyRobot::Command::Rotate
-        .new(robot, ToyRobot::Command::Rotate::Direction::LEFT)
-        .execute
+        .new(robot, ToyRobot::Table.new, STDOUT)
+        .execute(ToyRobot::Command::Rotate::RotateDirection::LEFT)
 
       robot.direction.should eq(ToyRobot::Robot::Direction::SOUTH)
     end
@@ -46,7 +46,9 @@ describe ToyRobot::Command::Rotate do
       robot = ToyRobot::Robot.new
 
       expect_raises(ToyRobot::NotPlaced) do
-        ToyRobot::Command::Rotate.new(robot, ToyRobot::Command::Rotate::Direction::RIGHT).execute
+        ToyRobot::Command::Rotate
+          .new(robot, ToyRobot::Table.new, STDOUT)
+          .execute(ToyRobot::Command::Rotate::RotateDirection::LEFT)
       end
     end
   end

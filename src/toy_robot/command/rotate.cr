@@ -1,25 +1,19 @@
 module ToyRobot
   module Command
     class Rotate < Base
-      enum Direction
+      enum RotateDirection
         LEFT
         RIGHT
       end
 
-      property robot : Robot
-      getter direction : Direction
-
-      def initialize(@robot : Robot, @direction : Direction)
-      end
-
-      def execute
+      def execute(rotate_direction : RotateDirection)
         raise NotPlaced.new("You need to place robot before making a move") unless robot.placed?
 
-        robot.direction = Robot::Direction.new(new_direction % 4)
+        robot.direction = Robot::Direction.new(new_direction(rotate_direction) % 4)
       end
 
-      private def new_direction : Int32
-        if direction.right?
+      private def new_direction(rotate_direction : RotateDirection) : Int32
+        if rotate_direction.right?
           robot_direction + 1
         else
           robot_direction - 1

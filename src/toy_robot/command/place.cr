@@ -1,20 +1,9 @@
 module ToyRobot
   module Command
     class Place < Base
-      property robot : Robot
-      property table : Table
-      property x : Int32
-      property y : Int32
-      property direction : Robot::Direction
-
-      def initialize(@robot : Robot,
-                     @table : Table,
-                     @x : Int32,
-                     @y : Int32,
-                     @direction : Robot::Direction)
-      end
-
-      def execute
+      def execute(x : Int32,
+                  y : Int32,
+                  direction : Robot::Direction)
         robot.x = x
         robot.y = y
         robot.direction = direction

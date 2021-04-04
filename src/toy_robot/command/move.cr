@@ -8,12 +8,6 @@ module ToyRobot
         WEST:  {-1, 0},
       }
 
-      property robot : Robot
-      property table : Table
-
-      def initialize(@robot : Robot, @table : Table)
-      end
-
       def execute
         raise NotPlaced.new("You need to place robot before making a move") unless robot.placed?
         raise OutsideOfTable.new("You can't move outside of the table") unless table.fits?(new_x, new_y)

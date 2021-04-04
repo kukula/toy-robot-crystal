@@ -5,7 +5,7 @@ describe ToyRobot::Command::Move do
     it "moves robot one unit forward in the north direction" do
       table = ToyRobot::Table.new
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::NORTH)
-      ToyRobot::Command::Move.new(robot, table).execute
+      ToyRobot::Command::Move.new(robot, table, STDOUT).execute
 
       robot.x.should eq(0)
       robot.y.should eq(1)
@@ -18,7 +18,7 @@ describe ToyRobot::Command::Move do
         ToyRobot::Robot::Direction::NORTH)
 
       expect_raises(ToyRobot::OutsideOfTable) do
-        ToyRobot::Command::Move.new(robot, table).execute
+        ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       end
     end
 
@@ -28,7 +28,7 @@ describe ToyRobot::Command::Move do
         ToyRobot::Table::DEFAULT_HEIGHT,
         ToyRobot::Robot::Direction::SOUTH)
 
-      ToyRobot::Command::Move.new(robot, table).execute
+      ToyRobot::Command::Move.new(robot, table, STDOUT).execute
 
       robot.x.should eq(0)
       robot.y.should eq(ToyRobot::Table::DEFAULT_HEIGHT - 1)
@@ -39,7 +39,7 @@ describe ToyRobot::Command::Move do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::SOUTH)
 
       expect_raises(ToyRobot::OutsideOfTable) do
-        ToyRobot::Command::Move.new(robot, table).execute
+        ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       end
     end
 
@@ -49,7 +49,7 @@ describe ToyRobot::Command::Move do
         0,
         ToyRobot::Robot::Direction::WEST)
 
-      ToyRobot::Command::Move.new(robot, table).execute
+      ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       robot.x.should eq(ToyRobot::Table::DEFAULT_WIDTH - 1)
       robot.y.should eq(0)
     end
@@ -59,7 +59,7 @@ describe ToyRobot::Command::Move do
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::WEST)
 
       expect_raises(ToyRobot::OutsideOfTable) do
-        ToyRobot::Command::Move.new(robot, table).execute
+        ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       end
     end
 
@@ -67,7 +67,7 @@ describe ToyRobot::Command::Move do
       table = ToyRobot::Table.new
       robot = ToyRobot::Robot.new(0, 0, ToyRobot::Robot::Direction::EAST)
 
-      ToyRobot::Command::Move.new(robot, table).execute
+      ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       robot.x.should eq(1)
       robot.y.should eq(0)
     end
@@ -79,7 +79,7 @@ describe ToyRobot::Command::Move do
         ToyRobot::Robot::Direction::EAST)
 
       expect_raises(ToyRobot::OutsideOfTable) do
-        ToyRobot::Command::Move.new(robot, table).execute
+        ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       end
     end
 
@@ -88,7 +88,7 @@ describe ToyRobot::Command::Move do
       robot = ToyRobot::Robot.new
 
       expect_raises(ToyRobot::NotPlaced) do
-        ToyRobot::Command::Move.new(robot, table).execute
+        ToyRobot::Command::Move.new(robot, table, STDOUT).execute
       end
     end
   end

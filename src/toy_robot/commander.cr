@@ -3,46 +3,36 @@ require "./command/*"
 module ToyRobot
   class Commander
     getter output : IO::FileDescriptor
-    getter error_output : IO::FileDescriptor
     property robot : Robot
     getter table : Table
 
     def initialize(@output = STDOUT,
-                   @error_output = STDERR,
                    @robot = Robot.new,
                    @table = Table.new)
     end
 
-    def parse(input : String) : Command::Base?
+    def execute(input : String) : Command::Base?
       case input
       when /^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/i
         _command, x, y, direction = input.gsub(",", " ").split
-        Command::Place
-          .new(
-            robot,
-            table,
-            x.to_i,
-            y.to_i,
-            Robot::Direction.parse(direction))
+        command = Command::Place.new(robot, table, output)
+        command.execute(x.to_i, y.to_i, Robot::Direction.parse(direction))
       when /^MOVE$/i
-        Command::Move.new(robot, table)
+        command = Command::Move.new(robot, table, output)
+        command.execute
       when /^LEFT$/i
-        Command::Rotate.new(robot, Command::Rotate::Direction::LEFT)
+        command = Command::Rotate.new(robot, table, output)
+        command.execute(Command::Rotate::RotateDirection::LEFT)
       when /^RIGHT$/i
-        Command::Rotate.new(robot, Command::Rotate::Direction::RIGHT)
+        command = Command::Rotate.new(robot, table, output)
+        command.execute(Command::Rotate::RotateDirection::RIGHT)
       when /^REPORT$/i
-        Command::Report.new(robot, output)
+        command = Command::Report.new(robot, table, output)
+        command.execute
       else
         raise UnrecognisedCommand.new("Unrecognised command, please RTM")
       end
-    end
-
-    def execute(input : String)
-      command = parse(input)
-      return unless command
-      command.execute
-    rescue ex : UnrecognisedCommand | NotPlaced | OutsideOfTable | WrongDirection
-      error_output.puts "Ignored error for input '#{input}': #{ex.message}"
+      command
     end
   end
 end

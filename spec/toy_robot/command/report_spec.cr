@@ -1,5 +1,4 @@
 require "../../spec_helper"
-require "stdio"
 
 describe ToyRobot::Command::Report do
   describe "#execute" do
@@ -8,7 +7,7 @@ describe ToyRobot::Command::Report do
 
       output = Stdio.capture do |io|
         ToyRobot::Command::Report
-          .new(robot, STDOUT)
+          .new(robot, ToyRobot::Table.new, STDOUT)
           .execute
 
         io.out.gets
@@ -21,7 +20,9 @@ describe ToyRobot::Command::Report do
       robot = ToyRobot::Robot.new
 
       expect_raises(ToyRobot::NotPlaced) do
-        ToyRobot::Command::Report.new(robot, STDOUT).execute
+        ToyRobot::Command::Report
+          .new(robot, ToyRobot::Table.new, STDOUT)
+          .execute
       end
     end
   end

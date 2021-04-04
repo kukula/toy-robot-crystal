@@ -107,7 +107,7 @@ $ crystal spec
 ## Design decisions
 
 - I choose to build this app using Crystal because it's a very pleasant to work with language, rich with features and tools.
-- `Commander#parse` is kind of controller for user input
+- `Commander#execute` is kind of controller for user input
 - I used command pattern for commands implementation
 - I used STDIN for user input, STDOUT and STDERR for output. So even though errors are ignored you can write them to error log
 - I used TDD to implement commands and other classes and structs
